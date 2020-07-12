@@ -1,0 +1,19 @@
+{
+	"created_id": "11th July 2020",
+	"heading": "Developing a node dependency while using it in other project.",
+	"tags": [ "npm", "javascript" ],
+	"content": [
+		{
+			"type": "text",
+			"text": "content"
+		},
+		{
+			"type": "code",
+			"text": "<h1><h1>"
+		},
+		{
+			"type": "info",
+			"text": "This is some info type text"
+		}
+	]
+}
