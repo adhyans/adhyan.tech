@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import AdhyanTech from '../AdhyanTech';
+import AdhyanTech from '../../icons/AdhyanTech';
 
 export const HeaderWrapper = styled.div`
   background: #bc6565;
