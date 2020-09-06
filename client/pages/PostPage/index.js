@@ -1,19 +1,17 @@
-import { Link } from 'react-router-dom';
 import React from 'react';
+import styled from 'styled-components';
+import Header from './components/Header';
+import PostText from './components/PostText';
 
-const Layout = () => (
-  <div>
-    <nav>
-      <ul>
-        <li>
-          <Link to="/main">All Posts</Link>
-        </li>
-        <li>
-          <Link to="/another">Contact Me!</Link>
-        </li>
-      </ul>
-    </nav>
-  </div>
-);
+const PostPageWrapper = styled.div``;
 
-export default Layout;
+function PostPage() {
+  return (
+    <PostPageWrapper>
+      <Header />
+      <PostText />
+    </PostPageWrapper>
+  );
+}
+
+export default PostPage;
