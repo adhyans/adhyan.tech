@@ -3,7 +3,7 @@ import { HeaderWrapper, StyledLogo, HeaderText, MetaInfoWrapper, TagsWrapper, Ta
 
 Header.propTypes = {};
 
-function Header(props) {
+function Header({ title }) {
   return (
     <HeaderWrapper>
       <div className="content">
@@ -16,9 +16,7 @@ function Header(props) {
           </div>
         </nav>
         <HeaderText>
-          <h1>
-            How to develop a project dependency while using it as a dependency in another project ?
-          </h1>
+          <h1>{title}</h1>
         </HeaderText>
         <MetaInfoWrapper>
           <p className="date-published">19th July 2020</p>
