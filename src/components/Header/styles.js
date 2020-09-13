@@ -28,10 +28,12 @@ export const HeaderWrapper = styled.div`
 
 export const HeaderText = styled.div`
   width: 95%;
-  font-size: 24px;
   margin-top: 5rem;
 
   h1 {
+    font-size: 4.4rem;
+    line-height: 120%;
+    width: 90%;
     font-weight: bold;
   }
 `;

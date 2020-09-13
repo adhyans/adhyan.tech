@@ -2,15 +2,15 @@ import React from 'react';
 import { Link, graphql } from 'gatsby';
 
 const BlogIndex = ({ data }) => {
-  const { edges: posts } = data.allMdx;
+  const { nodes: posts } = data.allMdx;
+  console.log(posts);
   return (
     <div>
-      <h1>Awesome MDX Blog</h1>
       <ul>
         {posts &&
-          posts.map(({ node: post }) => (
+          posts.map(post => (
             <li key={post.id}>
-              <Link to={post.fields.slug}>
+              <Link to={post.frontmatter.path}>
                 <h2>{post.frontmatter.title}</h2>
               </Link>
               <p>{post.excerpt}</p>
