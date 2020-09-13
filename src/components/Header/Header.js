@@ -1,9 +1,12 @@
 import React from 'react';
+import { format } from 'date-fns';
 import { HeaderWrapper, StyledLogo, HeaderText, MetaInfoWrapper, TagsWrapper, Tag } from './styles';
 
 Header.propTypes = {};
 
-function Header({ title }) {
+function Header({ title, date, tags }) {
+  const dateObject = new Date(date);
+
   return (
     <HeaderWrapper>
       <div className="content">
@@ -19,14 +22,13 @@ function Header({ title }) {
           <h1>{title}</h1>
         </HeaderText>
         <MetaInfoWrapper>
-          <p className="date-published">19th July 2020</p>
+          <p className="date-published">{format(dateObject, 'MMM d, yyyy')}</p>
           <TagsWrapper>
-            <Tag>
-              <p>NPM</p>
-            </Tag>
-            <Tag>
-              <p>Node</p>
-            </Tag>
+            {tags.map(tag => (
+              <Tag>
+                <p>{tag}</p>
+              </Tag>
+            ))}
           </TagsWrapper>
         </MetaInfoWrapper>
       </div>

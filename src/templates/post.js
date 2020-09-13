@@ -22,7 +22,11 @@ const PostTemplate = ({ data: { mdx } }) => {
         <meta name="description" content={description} />
       </Helmet>
       <PostPageWrapper>
-        <Header title={mdx.frontmatter.title} />
+        <Header
+          title={mdx.frontmatter.title}
+          date={mdx.frontmatter.date}
+          tags={mdx.frontmatter.tags}
+        />
         <PostText body={mdx.body} />
       </PostPageWrapper>
     </ThemeProvider>
@@ -32,11 +36,15 @@ const PostTemplate = ({ data: { mdx } }) => {
 export const pageQuery = graphql`
   query BlogPostQuery($id: String) {
     mdx(id: { eq: $id }) {
-      id
-      body
       frontmatter {
         title
+        path
+        tags
+        date
       }
+      id
+      excerpt
+      body
     }
   }
 `;
