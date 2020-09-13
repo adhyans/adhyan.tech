@@ -1,19 +1,23 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   siteMetadata: {
     title: 'adhyan.tech',
-    description: 'tech bytes with adhyan',
+    description: 'Deep dive into what and how of things',
     author: '@tech_adhyan',
   },
   plugins: [
     {
       resolve: `gatsby-plugin-mdx`,
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
       options: {
-        defaultLayouts: { default: path.resolve('./src/components/layout.js') },
+        name: 'posts',
+        path: 'posts',
       },
     },
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-styled-components'
+    'gatsby-plugin-styled-components',
   ],
-}
+};
