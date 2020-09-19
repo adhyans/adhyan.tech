@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 html {
@@ -12,4 +12,10 @@ h1 {
   margin: 0;
   padding: 0;
 }
+`;
+
+export const Layout = styled.div`
+  max-width: 90rem;
+  margin: auto;
+  margin-top: 2.4rem;
 `;
