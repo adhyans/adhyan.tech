@@ -27,7 +27,7 @@ const PostTemplate = ({ data: { mdx } }) => {
           date={mdx.frontmatter.date}
           tags={mdx.frontmatter.tags}
         />
-        <Layout>
+        <Layout width="100rem">
           <PostText body={mdx.body} />
         </Layout>
       </PostPageWrapper>
