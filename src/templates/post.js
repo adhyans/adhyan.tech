@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Helmet from 'react-helmet';
 import PostText from '../components/PostText';
 import useSiteMetaData from '../hooks/use-sitemetadata';
-import { GlobalStyle } from '../components/common/styles';
+import { GlobalStyle, Layout } from '../components/common/styles';
 
 const PostPageWrapper = styled.div``;
 
@@ -27,7 +27,9 @@ const PostTemplate = ({ data: { mdx } }) => {
           date={mdx.frontmatter.date}
           tags={mdx.frontmatter.tags}
         />
-        <PostText body={mdx.body} />
+        <Layout>
+          <PostText body={mdx.body} />
+        </Layout>
       </PostPageWrapper>
     </ThemeProvider>
   );

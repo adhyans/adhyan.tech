@@ -9,6 +9,10 @@ import HomePageCard from '../components/HomePageCard';
 
 const PostsWrapper = styled.div`
   margin-top: 7rem;
+
+  @media (max-width: 60rem) {
+    margin-top: 4rem;
+  }
 `;
 
 const BlogIndex = ({ data }) => {
