@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby';
 import { format } from 'date-fns';
 import { HeaderWrapper, StyledLogo, HeaderText, MetaInfoWrapper, TagsWrapper, Tag } from './styles';
 
@@ -11,7 +12,9 @@ function Header({ title, date, tags }) {
     <HeaderWrapper>
       <div className="content">
         <nav>
-          <StyledLogo width="180" height="30" />
+          <Link to="/">
+            <StyledLogo width="180" height="30" />
+          </Link>
           {/* <div className="nav-links">
             <ul>
               <li>about me</li>
@@ -25,7 +28,7 @@ function Header({ title, date, tags }) {
           <p className="date-published">{format(dateObject, 'MMM d, yyyy')}</p>
           <TagsWrapper>
             {tags.map(tag => (
-              <Tag>
+              <Tag ml>
                 <p>{tag}</p>
               </Tag>
             ))}
