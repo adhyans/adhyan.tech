@@ -18,4 +18,9 @@ export const Layout = styled.div`
   max-width: 90rem;
   margin: auto;
   margin-top: 2.4rem;
+
+  @media (max-width: 90rem) {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
 `;

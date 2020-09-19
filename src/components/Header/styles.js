@@ -7,7 +7,9 @@ export const HeaderWrapper = styled.div`
   /* added due to margin collapse on child element */
 
   .content {
-    margin: 2rem 25% 0 25%;
+    max-width: 100rem;
+    margin: auto;
+    margin-top: 2rem;
 
     nav {
       display: flex;
@@ -23,23 +25,33 @@ export const HeaderWrapper = styled.div`
         }
       }
     }
+
+    @media (max-width: 100rem) {
+      margin-left: 2rem;
+      margin-left: 2rem;
+    }
   }
 `;
 
 export const HeaderText = styled.div`
-  width: 95%;
   margin-top: 5rem;
 
   h1 {
     font-size: 4.4rem;
     line-height: 120%;
-    width: 90%;
     font-weight: bold;
+
+    @media (max-width: 60rem) {
+      font-size: 2.4rem;
+    }
   }
 `;
 
 export const StyledLogo = styled(AdhyanTech)`
   cursor: pointer;
+  @media (max-width: 60rem) {
+    width: 12rem;
+  }
 `;
 
 export const MetaInfoWrapper = styled.div`
@@ -53,6 +65,10 @@ export const MetaInfoWrapper = styled.div`
     line-height: 3.4rem;
     padding: 0;
     margin: 0;
+
+    @media (max-width: 60rem) {
+      font-size: 1.4rem;
+    }
   }
 `;
 
@@ -75,5 +91,12 @@ export const Tag = styled.div`
   p {
     padding: 0;
     margin: 0;
+  }
+
+  @media (max-width: 60rem) {
+    font-size: 1.4rem;
+    width: 5rem;
+    line-height: 2.5rem;
+    margin-left: ${({ ml }) => (ml ? '1rem' : '0')};
   }
 `;
