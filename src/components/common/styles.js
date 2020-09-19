@@ -15,7 +15,7 @@ h1 {
 `;
 
 export const Layout = styled.div`
-  max-width: 90rem;
+  max-width: ${({ width }) => (width ? width : '90rem')};
   margin: auto;
   margin-top: 2.4rem;
 
