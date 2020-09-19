@@ -12,11 +12,11 @@ function Header({ title, date, tags }) {
       <div className="content">
         <nav>
           <StyledLogo width="180" height="30" />
-          <div className="nav-links">
+          {/* <div className="nav-links">
             <ul>
               <li>about me</li>
             </ul>
-          </div>
+          </div> */}
         </nav>
         <HeaderText>
           <h1>{title}</h1>
