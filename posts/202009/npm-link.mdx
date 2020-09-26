@@ -15,7 +15,7 @@ The general workflow for the developers starting with developing a package is li
 2. Generate the assets which will be released to npm.
 3. To test the generated assets on local without releasing on production, developers generally copy the generated assets and paste it into the _node_modules_ of the project.
 
-There is nothing wrong with the above workflow, but when you make changes to the package repeatedly, then publishing feels like a bit of a blocker in testing your package changes in your project as fast as possible.
+There is nothing wrong with the above workflow, but when you make changes to the package repeatedly, then copy/pasting feels like a bit of a blocker in testing your package changes in your project as fast as possible.
 
 ### How should a good workflow look like?
 
@@ -23,18 +23,13 @@ You change anything in your library, and the library build gets triggered. Your 
 
 NPM provides a nifty command to manage the workflow mentioned above. That command is [npm link](https://docs.npmjs.com/cli/link).
 
-Let’s see the above workflow in action.
-
-- [Clone]() this simple react hello world project from here.
-- [Clone]() this simple lib from here.
-
-__Note__: If you have your own react project and library you are currently working on, you can try the workflow in your project.
-
 Go into your library project directory and do -
 
 ```js
 npm link
 ```
+
+__Note__: If you face problems with permissions, you can run the npm link command with sudo or [change the global _node_modules_ to another path](http://npm.github.io/installation-setup-docs/installing/a-note-on-permissions.html) that does not require root privileges.
 
 This command creates a symlink to the global _node_modules_ folder. You can check the path to your gobal _node_modules_ directory using -
 
@@ -42,12 +37,8 @@ This command creates a symlink to the global _node_modules_ folder. You can chec
 npm config get prefix
 ```
 
-If you face problems with permissions, you can run the npm link command with sudo or [change the global _node_modules_ to another path](http://npm.github.io/installation-setup-docs/installing/a-note-on-permissions.html) that does not require root privileges.
-
 Once you have done `npm link`, cd into global _node_modules_ folder (you can get the global _node_modules_ directory from the above command) and you will see your package being symlinked to your package's project directory. For e.g:
 
 Go into your project and do npm link [your lib name]. This will create a symlink of the lib in your current project to the package in _node_modules_ folder, which we created in the last step.
 
-Now, whenever you change anything in your project it gets reflected into the lib present in the global _node_modules_ folder which in turn gets reflected in the project on which you are currently working on.
-
-__Note__: If you distribute your package after building it then make sure that config which are used to build the package are also in your project's build config.
+Now, whenever you change anything in your library project it gets reflected into the lib present in the global _node_modules_ folder which in turn gets reflected in the project on which you are currently working on.
