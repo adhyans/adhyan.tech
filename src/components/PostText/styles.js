@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const PostTextWrapper = styled.div`
   margin-top: 5rem;
+  margin-bottom: 10rem;
 
   p {
     padding: 0;
@@ -46,5 +47,10 @@ export const PostTextWrapper = styled.div`
     @media (max-width: 60rem) {
       font-size: 1.8rem;
     }
+  }
+
+  p > span > a {
+    margin-top: 4rem !important;
+    margin-bottom: 4rem !important;
   }
 `;
