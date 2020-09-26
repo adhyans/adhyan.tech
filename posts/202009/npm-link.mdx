@@ -30,9 +30,9 @@ Go into your library project directory and do -
 npm link
 ```
 
-__Note__: If you face problems with permissions, you can run the npm link command with sudo or [change the global _node_modules_ to another path](http://npm.github.io/installation-setup-docs/installing/a-note-on-permissions.html) which does not require root privileges.
+__Note__: If you face problems with permissions, you can run the npm link command with sudo or [change the global node_modules to another path](http://npm.github.io/installation-setup-docs/installing/a-note-on-permissions.html) which does not require root privileges.
 
-This command creates a symlink to the global `_node_modules_` folder. You can check the path to your gobal `_node_modules_` directory using -
+This command creates a symlink to the global `node_modules` folder. You can check the path to your gobal `node_modules` directory using -
 
 ```js
 npm config get prefix
@@ -44,6 +44,6 @@ Once you have done `npm link`, cd into global `node_modules` folder (you can get
 ![symlink graphic.](./../images/npm-link/image1.png)
 
 
-Go into your project and do `npm link [your lib name]`. This will create a symlink of the lib in your current project to the package in `_node_modules_` folder, which we created in the last step.
+Go into your project and do `npm link [your lib name]`. This will create a symlink of the lib in your current project to the package in global `node_modules` folder, which we created in the last step.
 
-Now, whenever you change anything in your library project it gets reflected into the lib present in the global `_node_modules_` folder which in turn gets reflected in the project on which you are currently working on.
+Now, whenever you change anything in your library project it gets reflected into the lib present in the global `node_modules` folder which in turn gets reflected in the project on which you are currently working on.
