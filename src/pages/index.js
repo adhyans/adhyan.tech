@@ -47,7 +47,7 @@ const BlogIndex = ({ data }) => {
 
 export const pageQuery = graphql`
   query blogIndex {
-    allMdx {
+    allMdx(sort: { order: DESC, fields: frontmatter___date }) {
       nodes {
         excerpt(pruneLength: 500)
         frontmatter {
