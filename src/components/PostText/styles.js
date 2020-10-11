@@ -43,7 +43,21 @@ export const PostTextWrapper = styled.div`
     }
   }
 
+  h4 {
+    margin: 4rem 0 2.4rem 0;
+    font-size: 2.8rem;
+    font-weight: bold;
+    padding: 0;
+
+    @media (max-width: 60rem) {
+      font-size: 2rem;
+    }
+  }
+
   pre {
+    overflow-x: scroll;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
     @media (max-width: 60rem) {
       font-size: 1.8rem;
     }

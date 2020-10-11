@@ -78,7 +78,7 @@ export const TagsWrapper = styled.div`
 `;
 
 export const Tag = styled.div`
-  width: 6rem;
+  padding: 0 1rem;
   background: white;
   margin-left: ${({ ml }) => (ml ? '1.2rem' : '0')};
   text-align: center;
