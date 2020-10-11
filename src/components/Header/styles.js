@@ -94,8 +94,8 @@ export const Tag = styled.div`
   }
 
   @media (max-width: 60rem) {
+    padding: 0 1rem;
     font-size: 1.4rem;
-    width: 5rem;
     line-height: 2.5rem;
     margin-left: ${({ ml }) => (ml ? '1rem' : '0')};
   }
