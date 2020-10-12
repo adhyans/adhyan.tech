@@ -19,7 +19,7 @@ export const Layout = styled.div`
   margin: auto;
   margin-top: 2.4rem;
 
-  @media (max-width: 90rem) {
+  @media (max-width: 60rem) {
     margin-left: 2rem;
     margin-right: 2rem;
   }
