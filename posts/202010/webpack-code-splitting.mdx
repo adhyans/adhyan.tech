@@ -6,7 +6,7 @@ tags:
   - webpack
 ---
 
-How the javascript module bundler splits, your code is one of the most important concepts to know when optimizing your website's performance. Understanding how chunking/splitting works makes the developer not see the bundler as a black box. 
+How the javascript module bundler splits your code is one of the most important concepts to know when optimizing your website's performance. Understanding how chunking/splitting works makes the developer not see the bundler as a black box. 
 
 ![I have the power meme](./../images/splitchunks/power.jpg)
 
@@ -106,7 +106,7 @@ __Why ?__
 
 <br />
 
-__Q.__ Now you might think of a question why wasn't _react_ module chunked in a different file as it's also imported from _node_modules_?
+__Q.__ Now you might think of a question why wasn't the _react_ module chunked in a different file as it's also imported from _node_modules_?
 
 Here's how to think about it, _react_ is imported in the entry chunk file, which is _hello.js_, and it's also being used in the async chunk, which is _async.js_, the entry chunk will be loaded whenever the webpage is rendered, and entry chunk already contains _react_ so there is no reason for webpack to create a new chunk.
 
@@ -182,11 +182,11 @@ __Why ?__
 
 - _main.js_ chunked because it's defined as an entry point in the webpack config file.
 
-- _vendors~async.js_ chunked because _lodash_ module is imported from _node_modules_ and is imported in _async_ chunk. 
+- _vendors~async.js_ chunked because the _lodash_ module is imported from _node_modules_ and is imported in _async_ chunk. 
 
 - _async.js_ chunked because it's dynamically loaded.
 
-- _vendors~main.js_ this is an extra chunk if we compare it with the default option. If you look carefully in the chunk contents, it contains _react_ module, and why is that? Let's check the definition for this option again i.e., it will create a chunk with the modules shared between the entry modules and async modules.
+- _vendors~main.js_ this is an extra chunk if we compare it with the default option. If you look carefully in the chunk contents, it contains the _react_ module, and why is that? Let's check the definition for this option again i.e., it will create a chunk with the modules shared between the entry modules and async modules.
 
 <br />
 
