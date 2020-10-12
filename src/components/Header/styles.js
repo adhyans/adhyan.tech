@@ -26,7 +26,7 @@ export const HeaderWrapper = styled.div`
       }
     }
 
-    @media (max-width: 100rem) {
+    @media (max-width: 60rem) {
       margin-left: 2rem;
       margin-left: 2rem;
     }
