@@ -16,6 +16,7 @@
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
+    "@ados/test-lib": "^1.14.0",
     "graphql": "^15.3.0",
     "lodash": "^4.17.20"
   }

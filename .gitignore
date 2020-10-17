@@ -69,4 +69,4 @@ yarn-error.log
 .yarn-integrity
 
 dist
-working-demos/*/*.package-lock.json
+working-demos/*/package-lock.json

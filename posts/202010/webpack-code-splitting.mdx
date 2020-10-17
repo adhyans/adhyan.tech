@@ -40,9 +40,16 @@ __2 => Async chunk -__ The chunks which are fetched from the server on demand i.
 
 ### SplitchunksPlugin in action
 
+__SplitChunksPlugins__ optimizes different types of chunks based on the options provided in the webpack file. By optimization I mean:
+
+- Chunks are further split if they use modules that are imported from _node_modules_.
+- Chunks are further split if the new chunk can be shared.
+
+__Note:__ The above two points suggests when new chunks are created but there is one more condition to the creation of chunks i.e the new chunk should be greater than 20kb (before min+gzip)
+
 __Default__
 
-By default, if we don't provide any __SplitChunksPlugins__ option in the webpack config file, it chunks/splits every dynamically loaded module(async/on-demand module), and it also splits any modules imported from _node_modules_. __SplitChunksPlugin__ tries to optimize the async chunks by default i.e., splits up any module imported from _node_modules_ in the async chunk.
+By default, if we don't provide any __SplitChunksPlugins__ option in the webpack config file, it chunks/splits every dynamically loaded module(async/on-demand module), and tries to optimize the async chunks.
 
 <br />
 
@@ -100,17 +107,15 @@ __Why ?__
 
 - _async.js_ chunked because it's dynamically loaded.
 
-- _vendors~lodash.js_ chunked because it's imported from _node_modules_ and is imported in _async_ chunk.
+- _vendors~lodash.js_ chunked because it's imported from _node_modules_ and is imported in _async_ chunk. Note that by default webpack tries to optimize the async chunk. By optimization means that webpack tries 
 
 - _main.js_ chunked because it's defined as an entry point in the webpack config file.
 
 <br />
 
-__Q.__ Now you might think of a question why wasn't the _react_ module chunked in a different file as it's also imported from _node_modules_?
+__Q.__ Now you might think of a question why wasn't the _react_ module chunked 
 
-Here's how to think about it, _react_ is imported in the entry chunk file, which is _hello.js_, and it's also being used in the async chunk, which is _async.js_, the entry chunk will be loaded whenever the webpage is rendered, and entry chunk already contains _react_ so there is no reason for webpack to create a new chunk.
-
-Consider when the lazy-loaded chunk (_async.js_) is requested after the page loads, you will not want that it downloads the _react_ again over the network, right?
+If you look carefully at _react_ module, it is imported in an entry chunk which is not an async chunk and also imported inside of an async chunk. In default configuration __SplitChunksPlugin__ only optimizes the async chunk that's is why there is no _react_ module inside of _async_ chunk but since webpack did not optimize the entry chunk, the _react_ module is inside of the entry chunk and async chunk shares the _module_ from the sync chunk which is our entry chunk. If webpack worked on the optimization of sync chunk too then we would have a completely different chunk containing _react_ module and used by both the sync and async chunk :). Read the next section to see the last line in action.
 
 #### Configuration
 
