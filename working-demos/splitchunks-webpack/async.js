@@ -1,5 +1,5 @@
 import React from 'react';
-import 'lodash';
+import '@ados/test-lib/dist/add';
 
 console.log('I am async chunk');
 console.log('I am async chunk');
