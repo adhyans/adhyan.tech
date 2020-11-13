@@ -4,13 +4,21 @@ import AdhyanTech from '../../icons/AdhyanTech';
 export const StyledLogo = styled(AdhyanTech)`
   cursor: pointer;
   padding-bottom: 1rem;
-  border-bottom: 0.7rem solid #bc6565;
+  margin: 3rem 0 0 3rem;
 
   @media (max-width: 60rem) {
     width: 12rem;
     padding-bottom: 0.6rem;
-    border-bottom: 0.4rem solid #bc6565;
+    visibility: hidden;
   }
 `;
 
-export const HeaderWrapper = styled.div``;
+export const HeaderWrapper = styled.div`
+  background: black;
+  color: white;
+  height: 32rem;
+
+  @media (max-width: 60rem) {
+    height: 24rem;
+  }
+`;

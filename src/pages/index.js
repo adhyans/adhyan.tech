@@ -27,8 +27,8 @@ const BlogIndex = ({ data }) => {
         <title>{title}</title>
         <meta name="description" content={description} />
       </Helmet>
+      <HomeHeader />
       <Layout>
-        <HomeHeader />
         <PostsWrapper>
           {posts &&
             posts.map(post => (
