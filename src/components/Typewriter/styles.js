@@ -19,11 +19,15 @@ export const TypewriterWrapper = styled.div`
 
   .closing-brace {
     margin-left: 1.4rem;
+
+    @media (max-width: 60rem) {
+      margin-left: 0.7rem;
+    }
   }
 
   .vertical-block {
     width: 0.8rem;
-    margin-left: 5px;
+    margin-left: 0.5rem;
     animation: ${({ verticalBlockColor }) =>
       verticalBlockColor
         ? css`
