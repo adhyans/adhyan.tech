@@ -1,0 +1,70 @@
+---
+title: Using custom UI for authentication and session persistence with aws amplify in react
+path: /user-authentication-amplify
+date: 2020-11-16
+tags:
+  - aws-amplify
+  - react
+---
+
+Aws amplify is a framework that allows developers to integrate user authentication in their applications quickly, along with some other useful services to create full-stack applications. Amplify uses AWS Cognito service under the hood to achieve user authentication.
+
+Let us see how we can link our custom login/signup component with AWS Amplify to authenticate our users and persist the user session across different web pages.
+
+__Note:__ I will be using the starter react app created by `create react app` as the base project and do all of the below steps.
+
+### Prerequisites
+
+Let's start by setting up the prerequisites required to set up `aws-amplify` in our project.
+
+1. Install `aws-amplify` CLI.
+
+```bash
+npm install -g @aws-amplify/cli
+```
+
+2. Configure amplify for your project.
+
+```bash
+amplify configure
+```
+
+3. As soon as you write this command and press enter, it will ask you to log in to the AWS console in your browser. Login to your AWS account, or if you don't have an account, then create one.
+
+4. Then come back to your terminal; it will be waiting for an enter keystroke.
+
+5. It will ask for a region, select the appropriate option, and press enter.
+
+6. It will ask for a user name now. Go to your AWS console, select IAM (identity access management), click on `users` options, and then select create a new user option.
+
+7. Create a new user with an administrative role so the `amplify-cli` can use this user to manage resources on AWS.
+
+import Video from "../../src/components/Video";
+
+<Video videoSrcURL={'https://player.vimeo.com/video/479817610'} videoTitle="Step 7" />
+
+8. Go back to the terminal, add the user, key, secret, and then select the default profile.
+
+### Amplify setup
+
+1. Install amplify library
+
+```bash
+npm install aws-amplify
+```
+
+2. Once the installation is done, open `src/index.js` and add the below lines to it at the top.
+
+```javascript
+import Amplify from "aws-amplify"; 
+import awsExports from "./aws-exports"; 
+Amplify.configure(awsExports);
+```
+
+`amplify` library now has been set up in our project to use various services provided by the amplify framework. Let's move to set up authentication with our custom react UI component. Before that, we will have to create a login component first.
+
+### Authentication setup
+
+Add the below files to your project, and you should have a fundamental login/signup component in your project.
+
+Check back later for complete blog.

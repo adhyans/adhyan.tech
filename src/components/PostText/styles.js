@@ -67,4 +67,9 @@ export const PostTextWrapper = styled.div`
     margin-top: 4rem !important;
     margin-bottom: 4rem !important;
   }
+
+  iframe {
+    width: 100%;
+    text-align: center;
+  }
 `;
