@@ -47,13 +47,21 @@ import Video from "../../src/components/Video";
 
 ### Amplify setup
 
-1. Install amplify library
+1. Initialize new amplify project.
+
+```bash
+amplify init
+```
+
+<Video videoSrcURL={'https://player.vimeo.com/video/479846494'} videoTitle="amplify init clip" />
+
+2. Install amplify js SDK
 
 ```bash
 npm install aws-amplify
 ```
 
-2. Once the installation is done, open `src/index.js` and add the below lines to it at the top.
+3. Once the installation is done, open `src/index.js` and add the below lines to it at the top.
 
 ```javascript
 import Amplify from "aws-amplify"; 

@@ -71,5 +71,8 @@ export const PostTextWrapper = styled.div`
   iframe {
     width: 100%;
     text-align: center;
+    @media (max-width: 60rem) {
+      height: 20rem;
+    }
   }
 `;
