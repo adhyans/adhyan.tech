@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import useSiteMetaData from '../hooks/use-sitemetadata';
 import HomeHeader from '../components/HomeHeader';
 import HomePageCard from '../components/HomePageCard';
+import Footer from '../components/Footer';
 
 const PostsWrapper = styled.div`
   margin-top: 7rem;
@@ -39,6 +40,7 @@ const BlogIndex = ({ data }) => {
                 path={post.frontmatter.path}
               />
             ))}
+          <Footer />
         </PostsWrapper>
       </Layout>
     </ThemeProvider>
