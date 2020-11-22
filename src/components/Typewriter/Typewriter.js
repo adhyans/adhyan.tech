@@ -6,13 +6,13 @@ Typewriter.propTypes = {};
 const timeInMs = 100;
 
 function Typewriter() {
-  const colors = ['#451f55', '#f8c630', '#457b9d'];
+  const colors = ['#451f55', '#f8c630', '#457b9d', '#c3dfe0', '#bc6565'];
   const [currentTopicIndex, setCurrentTopicIndex] = useState(0);
 
   const spanNode = useRef(null);
 
   useEffect(() => {
-    const array = ['webpack', 'node', 'npm'];
+    const array = ['webpack', 'node', 'npm', 'amplify', 'react'];
     let timer;
     for (let i = 0; i < array[currentTopicIndex].length; i++) {
       timer = setTimeout(function() {

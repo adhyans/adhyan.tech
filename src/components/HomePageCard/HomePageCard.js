@@ -8,15 +8,16 @@ function HomePageCard({ title, tags, excerpt, path }) {
     <CardWrapper>
       <Link to={path}>
         <h2>{title}</h2>
+        <TagsWrapper>
+          {tags.map((tag, index) => (
+            <Tag ml={index !== 0}>
+              <p>{tag}</p>
+            </Tag>
+          ))}
+        </TagsWrapper>
+        <p>{excerpt}</p>
+        <p className="read-more">Read more</p>
       </Link>
-      <TagsWrapper>
-        {tags.map((tag, index) => (
-          <Tag ml={index !== 0}>
-            <p>{tag}</p>
-          </Tag>
-        ))}
-      </TagsWrapper>
-      <p>{excerpt}</p>
     </CardWrapper>
   );
 }

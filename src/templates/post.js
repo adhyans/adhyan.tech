@@ -7,6 +7,7 @@ import Helmet from 'react-helmet';
 import PostText from '../components/PostText';
 import useSiteMetaData from '../hooks/use-sitemetadata';
 import { GlobalStyle, Layout } from '../components/common/styles';
+import Footer from '../components/Footer';
 
 const PostPageWrapper = styled.div``;
 
@@ -29,6 +30,7 @@ const PostTemplate = ({ data: { mdx } }) => {
         />
         <Layout width="100rem">
           <PostText body={mdx.body} />
+          <Footer />
         </Layout>
       </PostPageWrapper>
     </ThemeProvider>

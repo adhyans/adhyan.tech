@@ -6,7 +6,7 @@ export const PostTextWrapper = styled.div`
 
   p {
     padding: 0;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     line-height: 150%;
     margin: 1rem 0 1rem 0;
 
