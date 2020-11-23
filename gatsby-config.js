@@ -27,6 +27,12 @@ module.exports = {
         path: `${__dirname}/posts`,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        trackingIds: ['GA-G-13MG03ZRD8'],
+      },
+    },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
   ],
