@@ -30,7 +30,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingIds: ['GA-G-13MG03ZRD8'],
+        trackingIds: ['G-13MG03ZRD8'],
       },
     },
     'gatsby-plugin-react-helmet',
