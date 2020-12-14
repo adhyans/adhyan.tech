@@ -8,17 +8,17 @@ tags:
 
 Webpack, for most people, has been and still is like some magic box that takes some JS files and spits out several files to use in our application. This post will not talk about how it does that but will try to explain the final file's output after passing it via webpack.
 
-I will take [this](https://github.com/adhyans/webpack-starter) webpack starter project as a base to explain  webpack's build output. Take the clone of the project to follow play with the code used in the code or just read along.
+I will take [this](https://github.com/adhyans/webpack-starter) webpack starter project as a base to explain webpack's build output. Take the project's clone to follow and play with the code or just read along.
 
-Run `npm run build` in the project's root directory. A build directory will be generated if not already there and it will contain `main-{somehash}.js`. The build file should look like the following -
+Run `npm run build` in the project's root directory. A build directory will be generated if not already there, and it will contain `main-{somehash}.js`. The build file should look like the following -
 
 ```js
 (()=>{"use strict";console.log("I am the entry component")})();
 ```
 
-The above code is a [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) and the body of the [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) contains the contents of our entry file. Our entry file is [src/index.js](https://github.com/adhyans/webpack-starter/blob/main/src/index.js).
+The above code is an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE), and the body of the [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) contains the contents of our entry file. Our entry file is [src/index.js](https://github.com/adhyans/webpack-starter/blob/main/src/index.js).
 
-<Info>Wrapping the code in IIFE makes it safe from polluting the global namespace i.e any function, var defined in the file won't clash with the names already defined in the global namespace.</Info>
+<Info>Wrapping the code in IIFE makes it safe from polluting the global namespace, i.e., any function, var defined in the file, won't clash with the names already defined in the global namespace.</Info>
 
 Let's add one `import` to `src/index.js` and see how the output changes. Create a file `src/test.js` in parallel to `src/index.js`.
 
@@ -43,7 +43,7 @@ test();
 app();
 ```
 
-Run `npm run build` and check the build file, it should look like the following -
+Run `npm run build` and check the build file. It should look like the following -
 
 ```js
 (()=>{"use strict";console.log("I am a test function"),console.log("I am the entry component")})();
@@ -88,13 +88,13 @@ export default function test() {
 common();
 ```
 
-Run `npm run build` and check the build file, it should look like the following -
+Run `npm run build` and check the build file. It should look like the following -
 
 ```js
 (()=>{"use strict";function o(){console.log("I am a common function")}o(),console.log("I am a test function"),console.log("I am the entry component"),o()})();
 ```
 
-The import which is same in both of the files is extracted into a function and is referenced with the same name wherever it's being used. Webpack makes sure that the import which is being used at multiple places is not replaced by multiple function declaration of the same function thus keeping the final bundle size small.
+The same import for both files is extracted into a separate function and referenced with the same name wherever used. Webpack makes sure that the same import used at multiple places is not replaced by multiple function declaration of the same function, thus keeping the final bundle size small.
 
 Let's change the `src/index.js` file and import `React` to see how the build output changes.
 
@@ -111,13 +111,13 @@ const app = () => {
 app();
 ```
 
-Run `npm run build` and check the build file. The build file is too big to include here. I will just go over the important pieces of the code to make you understand how it's working. Search for the piece of code when in discussion in the below to relate more.
+Run `npm run build` and check the build file. The build file is too big to include here. I will go over the essential pieces of the code to make you understand how it's working. Search for the part of code when in the discussion below to relate more.
 
 <br />
 
 __1__. The ____webpack_module_cache____ object
 
-This object contains all the loaded/executed modules for the current chunk. Once the current build file is executed the cache pbject looks like the following
+This object contains all the loaded/executed modules for the current chunk. Once the current build file is executed, the cache object looks like the following.
 
 ![webpack cache object](./../images/webpack-build-anatomy/webpack-cache-object.png)
 
@@ -125,7 +125,7 @@ For now just consider the cache object contains all the modules executed during 
 
 <br />
 
-__2.__ The ____webpack_require____ function. This is function is at the very end of every chunk created by webpack. This function takes some _moduleId_ and returns the value if mapping of the _moduleId_ is present in the ____webpack_module_cache____ object. This function is responsible for populating the cache object.
+__2.__ The ____webpack_require____ function. This function is at the very end of every chunk created by webpack. This function takes some _moduleId_ and returns its value present in the ____webpack_module_cache____ object. This function is responsible for populating the cache object.
 
 ```js
   // The module cache
@@ -153,7 +153,7 @@ __2.__ The ____webpack_require____ function. This is function is at the very end
 ```
 <br />
 
-__3.__ Load entry module for the chunk. The entry module for the current project is `src/index.js` as defined in the webpack config file. If you look at the end of the build file there is a function call to load the entry module.
+__3.__ Load entry module for the chunk. The entry module for the current project is `src/index.js` as defined in the webpack config file. If you look at the end of the build file, there is a function call to load the entry module.
 
 ```js
 // startup
@@ -163,7 +163,7 @@ __webpack_require__('./src/index.js');
 
 <br />
 
-__4.__ Webpack modules object. The modules object contains code of all the modules used inside the project. The key is the name of the file and the value contains a function with the body of our code. This object is generallt present at the top of the build file.
+__4.__ Webpack modules object. The modules object contains the code of all the modules used inside the project. The key is the file's name, and the value is a function of our code's body. This object is generally present at the top of the build file.
 
 ```js
 var __webpack_modules__ = {
@@ -180,9 +180,9 @@ var __webpack_modules__ = {
 };
 ```
 
-<Info>The thing to note here is that the code from each and every file which we write and use is now scoped in a function by webpack. So there is no chance of variable name, function name collisions.</Info>
+<Info>The thing to note here is that the code from every file we write and use is now scoped in a function by webpack. So there is no chance of variable name, function name collisions.</Info>
 
-Let's explore the code in `__webpack_modules__['./src/index.js']` as this is the function which starts the execution of the chunk. Here's the code:
+Let's explore the code in __webpack_modules__['./src/index.js'] as this is the function that starts the chunk's execution. Here's the code:
 
 ```js
 __webpack_require__.r(__webpack_exports__);
@@ -198,14 +198,14 @@ app();
 
 __When does the above code is executed?__
 
-Remember the load module call in the last step using ____webpack_require____ function, if you look at the function body of the require function you will observe when the code corresponding to the _moduleId(i.e filename)_ is not found in the cache object then the code corresponding to that _moduleId_ is called using the ____webpack_modules____ object. The value of properties in the modules object is always a function.
+Remember the load module call in the last step using ____webpack_require____ function, if you look at the function body of the require function you will observe when the code corresponding to the _moduleId(i.e., filename)_ is not found in the cache object then the code corresponding to that _moduleId_ is called using the ____webpack_modules____ object. The value of properties in the modules object is always a function.
 
 
-The `src/index.js` file has a dependecy on the react module and you can see in the above code that webpack resolves the dependecy using the ____webpack_require____ function and the same process happens for the react module like we discussed for the loading of `src/index.js` in the last section.
+The `src/index.js` file has a dependency on the react module and you can see in the above code that webpack resolves the dependency using the ____webpack_require____ function and the same process happens for the react module like we discussed for the loading of `src/index.js` in the last section.
 
-<Info>The thing to note here is that code from each of the imported module is executed only once and the export values/functions from that file are cached. So, when the same import is used in another file the exported modules can be used directly rather than running the file again.</Info>
+<Info>The thing to note here is that code from each of the imported module is executed only once, and the export values/functions from that file are cached. When the same import is used in another file, the exported modules can be used directly rather than running the file again.</Info>
 
-If you do any intensive operation in file and export the resultant value for other functions to use, the operation is done only when the chunk is loaded/executed not for the number of imports of that file.
+Suppose you do any intensive operation in file and export the resultant value for other functions to use. In that case, the operation is done only when the chunk is loaded/executed, not for the number of imports of that file.
 
 ### Observations
 
@@ -213,15 +213,15 @@ __1.__ Each module is loaded/executed using ____webpack_require____ function.
 
 __2.__ The ____webpack_require____ function populates the ____webpack_module_cache____ object.
 
-__3.__ The ____webpack_modules____ object contains the code for each and every modules used inside the chunk and is wrapped in a function by webpack.
+__3.__ The ____webpack_modules____ object contains code for every module used inside the chunk and is wrapped in a function by webpack.
 
-__4.__ The modules are executed only once not for the number of times they are imported.
+__4.__ The modules are executed only once, not for the number of times they are imported.
 
-__5.__ The exported functions from the any module/file when used in other module/file have access to variable and functions of the file in which they were defined due to __Closure__.
+__5.__ The exported functions from any module/file, when used in other module/files, have access to the variable and functions of the file in which they were defined due to __Closure__.
 
 <br />
 
-Webpack tries to output the most optimized build file based on the code you have writtern and the webpack config file. In one of the future posts, I will try to explore how the build file is changed when we use dynamic import in our code or may be how tree shaking works based on how we write our code.
+Webpack tries to output the most optimized build file based on the code you have written and the webpack config file. In one of the future posts, I will explore how the build file is changed when we use dynamic import in our code or how tree shaking works based on how we write our code.
 
 <br />
 
