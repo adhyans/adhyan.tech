@@ -21,6 +21,11 @@ const PostTemplate = ({ data: { mdx } }) => {
         <html lang="en" />
         <title>{mdx.frontmatter.title || title}</title>
         <meta name="description" content={description} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@tech_adhyan" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content="" />
       </Helmet>
       <PostPageWrapper>
         <Header
