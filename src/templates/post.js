@@ -23,8 +23,8 @@ const PostTemplate = ({ data: { mdx } }) => {
         <meta name="description" content={description} />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@tech_adhyan" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
+        <meta name="twitter:title" content={mdx.frontmatter.title} />
+        <meta name="twitter:description" content={mdx.excerpt} />
         <meta name="twitter:image" content="" />
       </Helmet>
       <PostPageWrapper>
@@ -45,6 +45,7 @@ const PostTemplate = ({ data: { mdx } }) => {
 export const pageQuery = graphql`
   query BlogPostQuery($id: String) {
     mdx(id: { eq: $id }) {
+      excerpt(pruneLength: 100)
       frontmatter {
         title
         path
@@ -52,7 +53,6 @@ export const pageQuery = graphql`
         date
       }
       id
-      excerpt
       body
     }
   }
