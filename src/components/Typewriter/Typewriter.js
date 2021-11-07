@@ -37,7 +37,7 @@ function Typewriter() {
       verticalBlockColor={colors[(currentTopicIndex + 1) % colors.length]}
     >
       <h1 className="text">
-        adhyan.tech(<span ref={spanNode}></span>
+        adhyan.space(<span ref={spanNode}></span>
       </h1>
       <div className="vertical-block">
         <h1 className="closing-brace">)</h1>

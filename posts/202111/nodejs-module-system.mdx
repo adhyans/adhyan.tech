@@ -1,0 +1,70 @@
+---
+title: Build your own Node.js module system - CommonJS
+path: /nodejs-module-system
+date: 2021-11-06
+tags:
+  - nodejs
+---
+
+Let's build our own implementation of Node.js CommonJS module system
+
+There are two main concepts around CommonJS
+
+- `require` is a function that allows you to import module from the filesystem
+
+- `exports` and `module.exports` allows you to export public functionality from the module
+
+__Helper function to load a file from the disk__
+
+```js
+
+function loadModule(filename, module, require) {
+    const wrappedCode = `(function(module, exports, require) {
+        ${fs.readfileSync(filename, 'utf8')}
+    })(module, module.exports, require)`
+    eval(wrappedCode)
+}
+
+```
+
+__require function implementation__
+
+```js
+function require(moduleName) {
+    const id = require.resolve(moduleName);
+    if (require.cache[id]) {
+        return require.cache[id].exports
+    }
+    const module = {
+        exports = {},
+        id
+    };
+    require.cache[id] = module;
+    loadModule(id, module, require); // function defined in the snippet above
+    return module.exports;
+}
+
+require.cache = {};
+require.resolve = (moduleName) => {}
+
+```
+
+- `require.cache` contains evaluated module object. Thing to note here is that a module is only evaluated once in the lifecycle to the node application until and unless the module cache is deliberately cleared
+
+- `require.resolve` implements the resolving algorithm that implements how the module will be resolved. We will discuss about the resolving algorithm in the next section
+
+__Resolving algorithm__
+
+The require function can get following type of module request to load:
+
+- __file modules__: If the modulename starts with a relative path or absolute path i.e either with __./__ or __/__
+
+- __core modules__: If the modulename is not prefixed either with relative or absolute path then it's searched within Node.js core modules filesystem
+
+- __package modules__: If the modulename is not prefixed either with relative or absolute path and is not present in the Node.js core modules filesystem then the search for module is looked into the node_modules directory by navigating up the directory structure one by one till the project's root directory
+
+__Note:__ Both file and directory can match the modulename. Here's the priority order of what get's resolved in case there's a conflict
+
+- modulename.js
+- modulename/index.js
+- The directory file specified in the __main__ property of __modulename/package.json__
