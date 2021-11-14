@@ -27,6 +27,8 @@ function loadModule(filename, module, require) {
 
 ```
 
+<Info>Each file in Node.js is treated as a separate module and variables local to the module are private to that module because as we can see from the snippet above that each file is wrapped into a function</Info>
+
 __require function implementation__
 
 ```js
@@ -51,7 +53,7 @@ require.resolve = (moduleName) => {}
 
 - `require.cache` contains evaluated module object. Thing to note here is that a module is only evaluated once in the lifecycle to the node application until and unless the module cache is deliberately cleared
 
-- `require.resolve` implements the resolving algorithm that implements how the module will be resolved. We will discuss about the resolving algorithm in the next section
+- `require.resolve` implements the resolving algorithm that implements how the module will be resolved i.e where to look for the requested module and it returns absolute path of the file to load. We will discuss about the resolving algorithm in the next section
 
 __Resolving algorithm__
 
@@ -68,3 +70,7 @@ __Note:__ Both file and directory can match the modulename. Here's the priority 
 - modulename.js
 - modulename/index.js
 - The directory file specified in the __main__ property of __modulename/package.json__
+
+<Info>You can check the implementation of require function in the Node.js here - https://github.com/nodejs/node/blob/master/lib/internal/modules/cjs/loader.js#L991. This link might not point to exact require function declaration in future, you can also find the implementation of require function in code with function name i.e `Module.prototype.require`</Info>
+
+Have a nice day! keep digging :)
