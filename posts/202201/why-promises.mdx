@@ -1,0 +1,80 @@
+---
+title: World without Javascript Promise
+path: /world-without-javascript-promise
+date: 2022-01-22
+tags:
+  - javascript
+---
+
+Let's talk about problems that we face if we don't have javascript's __Promise__ API
+
+<br />
+
+__Callback hell__
+
+What happens when there is a dependency between different asynchronous function calls in javascript? We are forced to write code like the example below. One async function __callback__ calls another async function and similar process continues giving it's name as __callback hell__
+
+```js
+someAsyncFunction1(function cb1() {
+  const w = 1 + 1;
+  someAsyncFunction2(function cb2() {
+    const x = w + 1;
+    someAsyncFunction3(function cb3() {
+      const y = x + 1;
+      someAsyncFunction4(function cb4() {
+        const z = y + 1;
+        console.log(z);
+      });
+    });
+  });
+});
+```
+
+__Problems with above snippet__
+
+<br />
+
+__1.__ It's not readable and gets unmanageable as the nesting of dependent asynchronous function call increases
+
+__2.__ Error callback needs to be maintained to get error in any of the callbacks
+
+```js
+someAsyncFunction1(function cb1() {
+  const w = 1 + 1;
+
+  function errorCb(err) {
+    console.log(err)
+  } // maintaining callback at the root callback function 
+
+  someAsyncFunction1(function cb2() {
+    const x = w + 1;
+    if (someError) {
+      errorCb(someError)
+    }
+  });
+});
+```
+
+__3.__ What happens if there is an exception in any callback? The code breaks
+
+```js
+someAsyncFunction1(function cb1() {
+  const w = 1 + 1;
+
+  someAsyncFunction1(function cb2() {
+    const x = w + 1;
+    const y = JSON.parse({}); // throws exeption
+  });
+});
+```
+
+Your code breaks if you forget to put the above blob of code in try/catch
+
+<br />
+<br />
+
+Check the next blog to find out how __Promise__ API solves the problems posed by callback hell
+
+<br />
+
+Have a nice day! keep digging :)
