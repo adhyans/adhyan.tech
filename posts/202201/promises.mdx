@@ -1,0 +1,90 @@
+---
+title: Javascript Promise
+path: /javascript-promise
+date: 2022-01-23
+tags:
+  - javascript
+---
+
+Let's see how Javascript's Promise API solves issues discussed in [this](/world-without-javascript-promise) post
+
+<br />
+
+Brief introduction about __Promise__ API
+
+A __Promise__ is an object that contains final state of an asynchronous operation
+
+A promise object can represent any of these following states
+
+- Pending
+- Fulfilled
+- Rejected
+- Settled
+
+When the promise object is not fulfilled or rejected state then it's in pending state. If the promise object is either in fulfilled or rejected state then it's in settled state.
+
+```js
+promise.then(onFulfilled, onRejected)
+```
+
+__onFulfilled__ callback is called when promise object is settled. __onRejected__ callback is called when promise object is rejected.
+
+<br />
+
+Using async function as if they are not promisifed
+
+```js
+someAsyncFunction1(function cb1(err1, data1) {
+  const w = data1 + 1;
+  someAsyncFunction2(function cb2(err2, data2) {
+    const x = data2 + w + 1;
+    someAsyncFunction3(function cb3(err3, data3) {
+      const y = data3 + x + 1;
+      someAsyncFunction4(function cb4(err4, data4) {
+        const z = data4 + y + 1;
+        console.log(z);
+      });
+    });
+  });
+});
+```
+
+The above blob of code will change to the code below if the the asynchronous functions in the above code are promisified
+
+```js
+const promise1 = someAsyncFunction1.then(function onFulfilled(result) {
+    return result + 1
+}, function onRejected(err) {
+    // handle any exceptions in someAsyncFunction1 here
+}).then(function onFulfilled(result) {
+    return someAsyncFunction2(function onFulfilled(data) {
+        return data + result + 1;
+    });
+}, function onRejected(err) {
+    // handle any exceptions in someAsyncFunction2 here
+});
+// and so on
+```
+
+<Info>
+One awesome property of <b>then</b> method is that it synchronously returns another new promise object. Due to this property several async operations can be chained and it looks a lot like code written in a way that is no different from a way the developer writes a synchronous code. A bit less cognitive load for the developer.
+</Info>
+
+__How it solves the problems listed [here](/world-without-javascript-promise)
+__
+
+__=>__ The promisified asynchronous functions solves the problem of __callback hell__. There is no nesting of callbacks now and promisified async function callbacks i.e onFullfilled/onRejected don't have to deal with the closures of other async function callbacks function variables
+
+__=>__ Error callback is now maintained separately for each promisied function. The developer doesn't have to manage it
+
+__=>__ For any exceptions that occur inside the promise then the __onRejected__ callback will be called rather than abrupty breaking down the code
+
+<br />
+
+So, we can see that __Promise__ API is made in such a way that enables us to handle all the shortcomings of asynchronous callback style code gracefully.
+
+<br />
+
+<br />
+
+Have a nice day! keep digging :)
