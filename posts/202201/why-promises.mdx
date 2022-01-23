@@ -15,14 +15,14 @@ __Callback hell__
 What happens when there is a dependency between different asynchronous function calls in javascript? We are forced to write code like the example below. One async function __callback__ calls another async function and similar process continues giving it's name as __callback hell__
 
 ```js
-someAsyncFunction1(function cb1() {
-  const w = 1 + 1;
-  someAsyncFunction2(function cb2() {
-    const x = w + 1;
-    someAsyncFunction3(function cb3() {
-      const y = x + 1;
-      someAsyncFunction4(function cb4() {
-        const z = y + 1;
+someAsyncFunction1(function cb1(err1, data1) {
+  const w = data1 + 1;
+  someAsyncFunction2(function cb2(err2, data2) {
+    const x = data2 + w + 1;
+    someAsyncFunction3(function cb3(err3, data3) {
+      const y = data3 + x + 1;
+      someAsyncFunction4(function cb4(err4, data4) {
+        const z = data4 + y + 1;
         console.log(z);
       });
     });
@@ -34,35 +34,35 @@ __Problems with above snippet__
 
 <br />
 
-__1.__ It's not readable and gets unmanageable as the nesting of dependent asynchronous function call increases
+__=>__ It's not readable and gets unmanageable as the nesting of dependent asynchronous function call increases. To avoid variable name clashing of inner callback functions developers have to resort to naming convention like err1, err2, data1, data2 etc which is not ideal
 
-__2.__ Error callback needs to be maintained to get error in any of the callbacks
+__=>__ Error callback needs to be maintained to get error in any of the callbacks. If we forget to maintain a callback for the error than the error just gets lost
 
 ```js
-someAsyncFunction1(function cb1() {
-  const w = 1 + 1;
+someAsyncFunction1(function cb1(err1, data1) {
+  const w = data1 + 1;
 
   function errorCb(err) {
     console.log(err)
   } // maintaining callback at the root callback function 
 
-  someAsyncFunction1(function cb2() {
-    const x = w + 1;
-    if (someError) {
-      errorCb(someError)
+  someAsyncFunction2(function cb2(err2, data2) {
+    const x = data2 + w + 1;
+    if (err2) {
+      errorCb(err2)
     }
   });
 });
 ```
 
-__3.__ What happens if there is an exception in any callback? The code breaks
+__=>__ What happens if there is an exception in any callback? The code breaks
 
 ```js
-someAsyncFunction1(function cb1() {
-  const w = 1 + 1;
+someAsyncFunction1(function cb1(err1, data1) {
+  const w = data1 + 1 + 1;
 
-  someAsyncFunction1(function cb2() {
-    const x = w + 1;
+  someAsyncFunction2(function cb2(err2, data2) {
+    const x = data2 + w + 1;
     const y = JSON.parse({}); // throws exeption
   });
 });
@@ -73,7 +73,7 @@ Your code breaks if you forget to put the above blob of code in try/catch
 <br />
 <br />
 
-Check the next blog to find out how __Promise__ API solves the problems posed by callback hell
+Check the [this](/javascript-promise) blog to find out how __Promise__ API solves the problems posed by callback hell
 
 <br />
 
